@@ -30,7 +30,7 @@
 	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
 	// "shutdownAction": "none",
 
-	"postCreateCommand": "apt-get -y update && apt-get -y install git",
+	"postCreateCommand": "/workspaces/patient/.devcontainer/postCreateCommands.sh",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
