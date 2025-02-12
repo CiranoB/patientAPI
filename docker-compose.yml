@@ -20,12 +20,6 @@ services:
     build: .
     restart: always
     container_name: patient_api
-    environment:
-      MONGO_USERNAME: mongo
-      MONGO_PASSWORD: mongo
-      MONGO_HOST: mongo
-      MONGO_PORT: 27017
-      MONGO_DATABASE: patient
     ports:
       - "8080:8080"
     depends_on:

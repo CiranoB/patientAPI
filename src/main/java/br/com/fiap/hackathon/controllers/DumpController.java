@@ -18,36 +18,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fiap.hackathon.services.GPTService;
+import lombok.AllArgsConstructor;
+
 @RestController
 @RequestMapping("/test")
+@AllArgsConstructor
 public class DumpController {
+    private final GPTService gptService;
 
     @GetMapping("/company")
-    public String test(){
-        String apiKey = "API KEY!";
-        String apiUrl = "https://api.aimlapi.com/v1/chat/completions";
-        String requestBody = "{" +
-                "\"model\": \"gpt-4o\"," +
-                "\"messages\": [" +
-                "{\"role\": \"system\", \"content\": \"You are an AI assistant who knows everything.\"}," +
-                "{\"role\": \"user\", \"content\": \"Tell me, why is the sky blue?\"}" +
-                "]}";
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(apiUrl))
-                .header("Content-Type", "application/json")
-                .header("Authorization", "Bearer " + apiKey)
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                .build();
-
-        HttpClient httpClient = HttpClient.newHttpClient();
-        try {
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("Response: " + response.body());
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        return "Oi!";
+    @Deprecated
+    public String test(String systemContent, String userContent){
+        return this.gptService.run(systemContent, userContent);
     }
         
 
